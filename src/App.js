@@ -7,6 +7,28 @@ import Experience from "./components/experience";
 class App extends Component{
   constructor() {
     super();
+
+    this.state = {
+      education: [],
+      experience: [],
+    }
+  }
+
+  addInfo = (e) => {
+
+    // On each button click concatenate a value to the array so it will render once for each button click
+    if(e.target.id === 'edu') {
+      this.setState({
+        education: this.state.education.concat(0)
+      })
+
+    }
+    if(e.target.id === 'exp') {
+      this.setState({
+        experience: this.state.experience.concat(1)
+      })
+
+    }
   }
 
   submitInfo = (e) => {
@@ -16,11 +38,22 @@ class App extends Component{
   render() {
 
     return (
-      <div>
+      <div className="cv">
+
+        <button onClick={this.submitInfo}>View CV</button>
+
         <General />
-        <Education />
-        <Experience />
-        <button onClick={this.submitInfo}>Add information</button>
+
+        <button id="edu" onClick={this.addInfo}>Add Education</button>
+        <div className="education">
+          {this.state.education.map(() => <Education />)}
+        </div>
+        
+        <button id="exp" onClick={this.addInfo}>Add Experience</button>
+        <div className="experience">
+          {this.state.experience.map(() => <Experience />)}
+        </div>
+
       </div>
     );
 

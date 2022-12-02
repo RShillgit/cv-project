@@ -1,51 +1,43 @@
-// Educational experience like school name, title of study, date of study
-
 import { Component } from "react";
+import Edit from './edits';
 
 class Education extends Component {
-    constructor() {
-        super();
 
-        this.state = {
-            school: '',
-            study: '',
-            date: '',
-        }
-    }
+    editField = (e) => {
+        e.preventDefault();
 
-    handleChange = (e) => {
+        e.target.parentElement.style.display = 'none';
 
-        console.log(this.state)
-
-        if (e.target.id === 'school') {
-            this.setState({ school: e.target.value }) 
-        }
-        else if (e.target.id === 'study') {
-            this.setState({ study: e.target.value }) 
-        }
-        else {
-            this.setState({ date: e.target.value }) 
-        }   
+        const editName = document.querySelector(`.editInput${e.target.id}`);
+        editName.style.display = 'flex';
     }
 
     render() {
         return (
-            <form className="educationInfo">
-                <div className='educationInfoInputs'>
-                    <label>
-                        school: 
-                        <input id='school' onChange={this.handleChange} type="text" value={this.name} placeholder="Name"></input>
-                    </label>
-                    <label>
-                        Title of study: 
-                        <input id='study' onChange={this.handleChange} type="text"></input>
-                    </label>
-                    <label>
-                        Date of study: 
-                        <input id='date' onChange={this.handleChange} type="date"></input>
-                    </label>
+            <div className="educationInfo">
+
+                <div className='infoSchool'>
+                    <label>School: </label>
+                    <p>Penn State </p>
+                    <button id='School' onClick={this.editField}>Edit</button>
                 </div>
-            </form>
+                <Edit divClass="editInputSchool" inputID="School" inputType="text" value="Penn State"/> 
+            
+                <div className='infoTitle'>
+                    <label>Title of study: </label>
+                    <p>Computer Science </p>
+                    <button id='Title' onClick={this.editField}>Edit</button>
+                </div>
+                <Edit divClass="editInputTitle" inputID="Title" inputType="text" value="Computer Science"/> 
+
+                <div className='infoDateStudy'>
+                    <label>Date of study:</label>
+                    <p>2022-05-14</p>
+                    <button id='DateStudy' onClick={this.editField}>Edit</button>
+                </div>
+                <Edit divClass="editInputDateStudy" inputID="DateStudy" inputType="date" value="05/14/2022"/>
+
+            </div>
 
         )
     }

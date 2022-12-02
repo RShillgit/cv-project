@@ -21,7 +21,7 @@ class Edit extends Component {
 
         e.target.parentElement.style.display = 'none';
 
-        const infoBeingEdited = document.querySelector(`.generalInfo${this.props.inputID}`);
+        const infoBeingEdited = document.querySelector(`.info${this.props.inputID}`);
         const editingValue = infoBeingEdited.querySelector('p');
         editingValue.innerHTML = this.state.newInput;
 

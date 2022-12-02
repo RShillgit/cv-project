@@ -1,6 +1,25 @@
-.generalInfoInputs, .educationInfoInputs, .experienceInfoInputs {
+#root {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.cv {
+    width: 50vw;
+}
+.cv div {
+    margin: 1rem;
+}
+
+.infoName, .infoEmail, .infoPhone, .infoSchool, .infoTitle, .infoDateStudy, .infoCompany, .infoPosition, .infoTask, .infoDateFrom, .infoDateUntil {
     padding: 1rem;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    align-items: center;
     gap: 1rem;
+    border: 1px solid red;
+}
+.editInputName, .editInputEmail, .editInputPhone, .editInputSchool, .editInputTitle, .editInputDateStudy, .editInputCompany, .editInputPosition, .editInputTask, .editInputDateFrom, .editInputDateUntil {
+    display: none;
+    padding: 1rem;
+    border: 1px solid blue;
 }
