@@ -35,13 +35,26 @@ class Experience extends Component{
     formSubmit = (e) => {
         e.preventDefault();
 
-        e.target.style.backgroundColor = 'gray';
-
         const company = this.state.Company;
         const position = this.state.Position;
         const task = this.state.Task;
         const datefrom = this.state.DateFrom;
         const dateuntil = this.state.DateUntil;
+
+        // Remove education info from the div and render a smaller div to show it has been added
+        const addedExperienceInformation = ([
+            <div className="addedEducationInformation"> 
+                <p>{company}</p>
+                <p>{position}</p>
+                <p>{task}</p>
+                <p>{datefrom}</p>
+                <p>{dateuntil}</p>
+                <button>X</button> 
+            </div>
+        ])
+
+        e.target.parentElement.innerHTML = addedExperienceInformation.map(() => <addedEducationInformation/>)
+    
 
         this.props.addExperience(company, position, task, datefrom, dateuntil);
     }

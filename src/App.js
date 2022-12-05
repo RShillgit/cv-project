@@ -49,8 +49,6 @@ class App extends Component{
           Schools: this.state.information.Schools.concat(newSchool)      
       }
     }))
-
-    console.log(this.state.information.Schools)
   }
 
   addExperience = (company, position, task, datefrom, dateuntil) => {
@@ -142,7 +140,9 @@ class App extends Component{
     return (
       <div className="cv">
 
-        <button id="preview-edit" onClick={this.viewEditClick}>View CV</button>
+        <div className="previewEditBtn">
+          <button id="preview-edit" onClick={this.viewEditClick}>View CV</button>
+        </div>
 
         <div className="editCV">
 

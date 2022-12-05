@@ -16,25 +16,40 @@
     flex-direction: row;
     align-items: center;
     gap: 1rem;
-    border: 1px solid red;
+    border: 1px solid gray;
+    border-radius: 1rem;
+    background-color: whitesmoke;
 }
 .editInputName, .editInputEmail, .editInputPhone {
     display: none;
     padding: 1rem;
-    border: 1px solid blue;
+    border: 1px solid gray;
+    border-radius: 1rem;
+    background-color: whitesmoke;
 }
 
 .viewCV {
     display: none;
 }
 
+.previewEditBtn {
+    display: flex;
+    justify-content: center;
+}
+
 .educationForm, .experienceForm {
     display: flex;
     flex-direction: column;
-    border: 1px solid blue;
+    border: 1px solid gray;
+    border-radius: 1rem;
+    background-color: whitesmoke;
     margin: 5px;
 }
 .educationInformation, .experienceInformation {
     display: flex;
     flex-direction: column;
+}
+
+.viewGeneralInfo, .viewEducationInfo, .viewExperienceInfo {
+    border: 1px solid blueviolet;
 }

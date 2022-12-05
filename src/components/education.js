@@ -27,12 +27,22 @@ class Education extends Component{
     formSubmit = (e) => {
         e.preventDefault();
 
-        e.target.style.backgroundColor = 'gray';
-
         const school = this.state.School;
         const title = this.state.Title;
         const date = this.state.DateStudy;
 
+        // Remove education info from the div and render a smaller div to show it has been added
+        const addedEducationInformation = ([
+            <div className="addedEducationInformation"> 
+                <p>{school}</p>
+                <p>{title}</p>
+                <p>{date}</p>
+                <button>X</button> 
+            </div>
+        ])
+
+        e.target.parentElement.innerHTML = addedEducationInformation.map(() => <addedEducationInformation/>)
+        
         this.props.addEducation(school, title, date);
     }
 
@@ -55,8 +65,6 @@ class Education extends Component{
 
                     <button onClick={this.formSubmit}>Add Education</button>
                 </div>    
-
-                
 
             </form>
         )

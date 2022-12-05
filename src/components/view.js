@@ -9,6 +9,32 @@ class View extends Component {
 
         const info = this.props.info; 
 
+        const educationInfo = (
+            info.Schools.map((school) => {
+                return (
+                    <div className="viewEducationInfo">
+                        <p>School: {school.School}</p>
+                        <p>Title of Study: {school.Title}</p>
+                        <p>Date of Study: {school.DateStudy}</p>
+                    </div>
+                )
+            })
+        );
+
+        const experienceInfo = (
+            info.Experience.map((exp) => {
+                return (
+                    <div className="viewExperienceInfo">
+                        <p>Company: {exp.Company}</p>
+                        <p>Position Title: {exp.Position}</p>
+                        <p>Tasks: {exp.Task}</p>
+                        <p>Employed From: {exp.DateFrom}</p>
+                        <p>Employed Until: {exp.DateUntil}</p>
+                    </div>
+                )
+            })
+        );
+
         return (
             <div>
                 <div className="viewGeneralInfo">
@@ -18,20 +44,10 @@ class View extends Component {
                 </div>
 
                 {/* Gonna need some type of for loop to render each education/experience */}
-                <div className="viewEducationInfo">
-                    <p>School: {info.Schools[0].School}</p>
-                    <p>Title of Study: {info.Schools[0].Title}</p>
-                    <p>Date of Study: {info.Schools[0].DateStudy}</p>
-
-                </div>
-
-                <div className="viewExperienceInfo">
-                    <p>Company: {info.Experience[0].Company}</p>
-                    <p>Position Title: {info.Experience[0].Position}</p>
-                    <p>Tasks: {info.Experience[0].Task}</p>
-                    <p>Employed From: {info.Experience[0].DateFrom}</p>
-                    <p>Employed Until: {info.Experience[0].DateUntil}</p>
-                </div>
+                
+                {educationInfo}
+                {experienceInfo}
+                
             </div>
         )
     }
