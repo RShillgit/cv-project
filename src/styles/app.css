@@ -23,3 +23,7 @@
     padding: 1rem;
     border: 1px solid blue;
 }
+
+.viewCV {
+    display: none;
+}

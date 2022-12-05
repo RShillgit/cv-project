@@ -3,6 +3,7 @@ import './styles/app.css';
 import General from "./components/general";
 import Education from "./components/education";
 import Experience from "./components/experience";
+import View from "./components/view";
 
 class App extends Component{
   constructor() {
@@ -11,6 +12,7 @@ class App extends Component{
     this.state = {
       education: [],
       experience: [],
+      preview: false,
     }
   }
 
@@ -31,8 +33,26 @@ class App extends Component{
     }
   }
 
-  submitInfo = (e) => {
-    console.log(e.target)
+  viewEditClick = () => {
+    this.setState(({
+      preview: !this.state.preview
+    }), this.handleView)
+  }
+
+  handleView = () => {
+
+    const previewEditBtn = document.getElementById('preview-edit');
+    const viewCVDiv = document.querySelector('.viewCV');
+
+    // Change button text and viewCV display depending on what screen is rendered
+    if (this.state.preview === false) {
+      previewEditBtn.innerHTML = 'View CV';
+      viewCVDiv.style.display = 'none';
+    }
+    else {
+      previewEditBtn.innerHTML = 'Edit CV';
+      viewCVDiv.style.display = 'flex';
+    }
   }
 
   render() {
@@ -40,20 +60,26 @@ class App extends Component{
     return (
       <div className="cv">
 
-        <button onClick={this.submitInfo}>View CV</button>
+        <div className="editCV">
+          <button id="preview-edit" onClick={this.viewEditClick}>View CV</button>
 
-        <General />
+          <General />
 
-        <button id="edu" onClick={this.addInfo}>Add Education</button>
-        <div className="education">
-          {this.state.education.map(() => <Education />)}
+          <button id="edu" onClick={this.addInfo}>Add Education</button>
+          <div className="education">
+            {this.state.education.map(() => <Education />)}
+          </div>
+          
+          <button id="exp" onClick={this.addInfo}>Add Experience</button>
+          <div className="experience">
+            {this.state.experience.map(() => <Experience />)}
+          </div>
         </div>
-        
-        <button id="exp" onClick={this.addInfo}>Add Experience</button>
-        <div className="experience">
-          {this.state.experience.map(() => <Experience />)}
-        </div>
 
+        <div className="viewCV">
+          <View />
+        </div>
+          
       </div>
     );
 
