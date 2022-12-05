@@ -1,63 +1,83 @@
-// Practical experience including company name, position title, main tasks of your jobs,
-// date from and until when you worked for that company
-
 import { Component } from "react";
-import Edit from "./edits";
 
-class Experience extends Component {
+class Experience extends Component{
+    constructor(props) {
+        super(props);
 
-    editField = (e) => {
+        this.state = {
+            Company: '',
+            Position: '',
+            Task: '',
+            DateFrom: '',
+            DateUntil: '',
+        }
+    }
+
+    handleChange = (e) => {
+
+        if (e.target.id === 'experienceCompany') {
+            this.setState({ Company: e.target.value }); 
+        }
+        else if (e.target.id === 'experiencePosition') {
+            this.setState({ Position: e.target.value }); 
+        }
+        else if (e.target.id === 'experienceTask') {
+            this.setState({ Task: e.target.value }); 
+        }
+        else if (e.target.id === 'experienceDateFrom') {
+            this.setState({ DateFrom: e.target.value }); 
+        }
+        else {
+            this.setState({ DateUntil: e.target.value }); 
+        }
+    }
+
+    formSubmit = (e) => {
         e.preventDefault();
 
-        e.target.parentElement.style.display = 'none';
+        e.target.style.backgroundColor = 'gray';
 
-        const editName = document.querySelector(`.editInput${e.target.id}`);
-        editName.style.display = 'flex';
+        const company = this.state.Company;
+        const position = this.state.Position;
+        const task = this.state.Task;
+        const datefrom = this.state.DateFrom;
+        const dateuntil = this.state.DateUntil;
+
+        this.props.addExperience(company, position, task, datefrom, dateuntil);
     }
 
     render() {
         return (
-            <div className="experienceInfo">
+            <form className="experienceForm">
+               
+                <div className='experienceInformation'>
 
-                <div className='infoCompany'>
-                    <label>Company Name: </label>
-                    <p>Tech Company </p>
-                    <button id='Company' onClick={this.editField}>Edit</button>
-                </div>
-                <Edit divClass="editInputCompany" inputID="Company" inputType="text" value="Tech Company"/> 
-            
-                <div className='infoPosition'>
-                    <label>Position Title: </label>
-                    <p>Software Engineer</p>
-                    <button id='Position' onClick={this.editField}>Edit</button>
-                </div>
-                <Edit divClass="editInputPosition" inputID="Position" inputType="text" value="Software Engineer"/> 
+                    <label>Company Name: 
+                        <input id="experienceCompany" onChange={this.handleChange} type="text"></input>
+                    </label>
+                                              
+                    <label>Position Title: 
+                        <input id="experiencePosition" onChange={this.handleChange} type="text"></input>
+                    </label>
+    
+                    <label>Task of Position:
+                        <input id="experienceTask" onChange={this.handleChange} type="text"></input>
+                    </label>
+                
+                    <label>Employed From: 
+                        <input id="experienceDateFrom" onChange={this.handleChange} type="date"></input>
+                    </label>
+    
+                    <label>Employed Until: 
+                        <input id="experienceDateUntil" onChange={this.handleChange} type="date"></input>
+                    </label>
 
-                <div className='infoTask'>
-                    <label>Task of Position:</label>
-                    <p>Code</p>
-                    <button id='Task' onClick={this.editField}>Edit</button>
+                    <button onClick={this.formSubmit}>Add Experience</button>
+    
                 </div>
-                <Edit divClass="editInputTask" inputID="Task" inputType="text" value="Code"/>
-
-                <div className='infoDateFrom'>
-                    <label>Employed From:</label>
-                    <p>2022-06-15</p>
-                    <button id='DateFrom' onClick={this.editField}>Edit</button>
-                </div>
-                <Edit divClass="editInputDateFrom" inputID="DateFrom" inputType="date" value="06/15/2022"/>
-
-                <div className='infoDateUntil'>
-                    <label>Employed Until:</label>
-                    <p>2022-12-02</p>
-                    <button id='DateUntil' onClick={this.editField}>Edit</button>
-                </div>
-                <Edit divClass="editInputDateUntil" inputID="DateUntil" inputType="date" value="12/02/2022"/>
-
-            </div>
+                                
+            </form>
         )
     }
-
 }
-
 export default Experience;

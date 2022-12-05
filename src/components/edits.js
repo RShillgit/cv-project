@@ -26,6 +26,9 @@ class Edit extends Component {
         editingValue.innerHTML = this.state.newInput;
 
         infoBeingEdited.style.display = 'flex';
+
+        // Change App's state
+        this.props.handleInputChange(this.props.inputID, this.state.newInput);
     }
 
     render() {

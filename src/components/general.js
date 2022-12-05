@@ -19,26 +19,25 @@ class General extends Component {
             
                 <div className='infoName'>
                     <label>Full Name: </label>
-                    <p>John Smith </p>
+                    <p>{this.props.fullName}</p>
                     <button id='Name' onClick={this.editField}>Edit</button>
                 </div>
-                <Edit divClass="editInputName" inputID="Name" inputType="text" value="John Smith"/> 
+                <Edit divClass="editInputName" inputID="Name" inputType="text" value={this.props.fullName} handleInputChange={this.props.handleInputChange}/> 
             
                 <div className='infoEmail'>
                     <label>Email: </label>
-                    <p>FakeEmail@email.com </p>
+                    <p>{this.props.Email}</p>
                     <button id='Email' onClick={this.editField}>Edit</button>
                 </div>
-                <Edit divClass="editInputEmail" inputID="Email" inputType="email" value="FakeEmail@email.com"/> 
+                <Edit divClass="editInputEmail" inputID="Email" inputType="email" value={this.props.Email} handleInputChange={this.props.handleInputChange}/> 
 
                 <div className='infoPhone'>
                     <label>Phone Number:</label>
-                    <p>555-555-5555</p>
+                    <p>{this.props.Phone}</p>
                     <button id='Phone' onClick={this.editField}>Edit</button>
                 </div>
-                <Edit divClass="editInputPhone" inputID="Phone" inputType="text" value="555-555-5555"/> 
-                
-
+                <Edit divClass="editInputPhone" inputID="Phone" inputType="text" value={this.props.Phone} handleInputChange={this.props.handleInputChange}/> 
+            
             </div>
             
         )

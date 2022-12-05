@@ -1,47 +1,65 @@
 import { Component } from "react";
-import Edit from './edits';
 
-class Education extends Component {
+class Education extends Component{
+    constructor(props) {
+        super(props);
 
-    editField = (e) => {
+        this.state = {
+            School: '',
+            Title: '',
+            DateStudy: '',
+        }
+    }
+
+    handleChange = (e) => {
+
+        if (e.target.id === 'educationSchool') {
+            this.setState({ School: e.target.value }); 
+        }
+        else if (e.target.id === 'educationTitle') {
+            this.setState({ Title: e.target.value }); 
+        }
+        else {
+            this.setState({ DateStudy: e.target.value }); 
+        }
+    }
+
+    formSubmit = (e) => {
         e.preventDefault();
 
-        e.target.parentElement.style.display = 'none';
+        e.target.style.backgroundColor = 'gray';
 
-        const editName = document.querySelector(`.editInput${e.target.id}`);
-        editName.style.display = 'flex';
+        const school = this.state.School;
+        const title = this.state.Title;
+        const date = this.state.DateStudy;
+
+        this.props.addEducation(school, title, date);
     }
 
     render() {
         return (
-            <div className="educationInfo">
+            <form className="educationForm">
+               
+                <div className='educationInformation'>
+                    <label>School: 
+                        <input id="educationSchool" onChange={this.handleChange} type="text"></input>
+                    </label>
 
-                <div className='infoSchool'>
-                    <label>School: </label>
-                    <p>Penn State </p>
-                    <button id='School' onClick={this.editField}>Edit</button>
-                </div>
-                <Edit divClass="editInputSchool" inputID="School" inputType="text" value="Penn State"/> 
-            
-                <div className='infoTitle'>
-                    <label>Title of study: </label>
-                    <p>Computer Science </p>
-                    <button id='Title' onClick={this.editField}>Edit</button>
-                </div>
-                <Edit divClass="editInputTitle" inputID="Title" inputType="text" value="Computer Science"/> 
+                    <label>Title of study: 
+                        <input id="educationTitle" onChange={this.handleChange} type="text"></input>
+                    </label>
+    
+                    <label>Date of study:
+                        <input id="educationDateStudy" onChange={this.handleChange} type="date"></input>
+                    </label>
 
-                <div className='infoDateStudy'>
-                    <label>Date of study:</label>
-                    <p>2022-05-14</p>
-                    <button id='DateStudy' onClick={this.editField}>Edit</button>
-                </div>
-                <Edit divClass="editInputDateStudy" inputID="DateStudy" inputType="date" value="05/14/2022"/>
+                    <button onClick={this.formSubmit}>Add Education</button>
+                </div>    
 
-            </div>
+                
 
+            </form>
         )
     }
-
 }
-
 export default Education;
