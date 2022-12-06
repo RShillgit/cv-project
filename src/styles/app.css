@@ -4,11 +4,12 @@
     align-items: center;
 }
 .cv {
-    width: 50vw;
+    width: 70vw;
 }
-.cv div {
+.cv, .editCV div, .viewCV {
     margin: 1rem;
 }
+
 
 .infoName, .infoEmail, .infoPhone {
     padding: 1rem;
@@ -44,12 +45,56 @@
     border-radius: 1rem;
     background-color: whitesmoke;
     margin: 5px;
+    align-items: center;
 }
 .educationInformation, .experienceInformation {
     display: flex;
     flex-direction: column;
+    width: 50%;
+    justify-content: center;
+    align-items: center;
+}
+.addedEducationInformation, .addedExperienceInformation {
+    display: none;
+    width: 100%;
+    justify-content: space-between;
+    background-color: whitesmoke;
+    border: 1px solid gray;
+    border-radius: 1rem;
+    padding: 0.5rem;
 }
 
 .viewGeneralInfo, .viewEducationInfo, .viewExperienceInfo {
-    border: 1px solid blueviolet;
+    border-bottom: 2px solid gray;
+}
+.viewEducationInfo, .viewExperienceInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+}
+
+.eduBtn, .expBtn {
+    display: flex;
+    justify-content: center;
+}
+.edu, .exp {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.edu h2, .exp h2 {
+    margin: 10px;
+}
+.edu p, .exp p {
+    margin: 8px;
+}
+
+.exp .expOverview {
+    display: flex;
+    gap: 1rem;
+}
+.exp .expTask {
+    font-style: italic;
 }

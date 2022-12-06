@@ -1,4 +1,6 @@
 import { Component } from "react";
+import AddedEdu from "./addedEdu";
+import uniqid from "uniqid";
 
 class Education extends Component{
     constructor(props) {
@@ -8,6 +10,7 @@ class Education extends Component{
             School: '',
             Title: '',
             DateStudy: '',
+            id: uniqid(),
         }
     }
 
@@ -21,6 +24,7 @@ class Education extends Component{
         }
         else {
             this.setState({ DateStudy: e.target.value }); 
+            this.setState({id: uniqid()})
         }
     }
 
@@ -30,43 +34,44 @@ class Education extends Component{
         const school = this.state.School;
         const title = this.state.Title;
         const date = this.state.DateStudy;
+        const id = this.state.id;
 
-        // Remove education info from the div and render a smaller div to show it has been added
-        const addedEducationInformation = ([
-            <div className="addedEducationInformation"> 
-                <p>{school}</p>
-                <p>{title}</p>
-                <p>{date}</p>
-                <button>X</button> 
-            </div>
-        ])
+        // Hide education form and display addedEducation div
+        const container = e.target.parentElement.parentElement.parentElement;
+        const educationForm = e.target.parentElement.parentElement;
+        const addedEducationDiv = container.querySelector('.addedEducationInformation');
+        educationForm.style.display = 'none';
+        addedEducationDiv.style.display = 'flex';
 
-        e.target.parentElement.innerHTML = addedEducationInformation.map(() => <addedEducationInformation/>)
-        
-        this.props.addEducation(school, title, date);
+        this.props.addEducation(school, title, date, id);
     }
 
     render() {
         return (
-            <form className="educationForm">
-               
-                <div className='educationInformation'>
-                    <label>School: 
-                        <input id="educationSchool" onChange={this.handleChange} type="text"></input>
-                    </label>
+            <div className="education">
 
-                    <label>Title of study: 
-                        <input id="educationTitle" onChange={this.handleChange} type="text"></input>
-                    </label>
-    
-                    <label>Date of study:
-                        <input id="educationDateStudy" onChange={this.handleChange} type="date"></input>
-                    </label>
+                <form className="educationForm">
+                
+                    <div className='educationInformation'>
+                        <label>School: 
+                            <input id="educationSchool" onChange={this.handleChange} type="text"></input>
+                        </label>
 
-                    <button onClick={this.formSubmit}>Add Education</button>
-                </div>    
+                        <label>Title of study: 
+                            <input id="educationTitle" onChange={this.handleChange} type="text"></input>
+                        </label>
+        
+                        <label>Date of study:
+                            <input id="educationDateStudy" onChange={this.handleChange} type="date"></input>
+                        </label>
 
-            </form>
+                        <button onClick={this.formSubmit}>Add Education</button>
+
+                    </div>    
+
+                </form>
+                <AddedEdu school={this.state.School} title={this.state.Title} datestudy={this.state.DateStudy} deleteEducation={this.props.deleteEducation} id={this.state.id}/>
+            </div>
         )
     }
 }

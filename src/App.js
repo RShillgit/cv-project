@@ -6,7 +6,6 @@ import Experience from "./components/experience";
 import View from "./components/view";
 
 
-
 class App extends Component{
   constructor() {
     super();
@@ -19,7 +18,8 @@ class App extends Component{
         Schools: [{
           School: 'Penn Dokie',
           Title: 'Computer Fiction',
-          DateStudy: '2030-05-15'
+          DateStudy: '2030-05-15',
+          id: '',
         }],
         Experience: [{
           Company: 'Tech Company',
@@ -27,6 +27,7 @@ class App extends Component{
           Task: 'Code',
           DateFrom: '2022-05-15',
           DateUntil: '2050-05-15',
+          id: '',
         }],
       },
       education: [],
@@ -35,12 +36,13 @@ class App extends Component{
     }
   }
 
-  addEducation = (school, title, date) => {
+  addEducation = (school, title, date, id) => {
 
     const newSchool = {
       School: school,
       Title: title,
       DateStudy: date,
+      id: id,
     }
 
     this.setState(prevState => ({
@@ -51,14 +53,20 @@ class App extends Component{
     }))
   }
 
-  addExperience = (company, position, task, datefrom, dateuntil) => {
+  deleteEducation = (id) => {
+    // find the school with this id and delete it from state
+    
+  }
+
+  addExperience = (company, position, task, datefrom, dateuntil, id) => {
 
     const newExperience = {
       Company: company,
       Position: position,
       Task: task,
       DateFrom: datefrom,
-      DateUntil: dateuntil
+      DateUntil: dateuntil,
+      id: id,
     }
 
     this.setState(prevState => ({
@@ -67,8 +75,11 @@ class App extends Component{
           Experience: this.state.information.Experience.concat(newExperience)      
       }
     }))
+  }
 
-    console.log(this.state.information.Experience)
+  deleteExperience = (id) => {
+    // find the experience with this id and delete it from state
+
   }
 
   handleInputChange = (ID, val) => {
@@ -148,16 +159,21 @@ class App extends Component{
 
           <General fullName={this.state.information.Name} Email={this.state.information.Email} Phone={this.state.information.Phone} handleInputChange={this.handleInputChange.bind(this)}/>
 
-          <button id="edu" onClick={this.addInfo}>Add Education</button>
+          <div className="eduBtn">
+            <button id="edu" onClick={this.addInfo}>Add Education</button>
+          </div>
+
           <div className="education">
             {/* <Education School={this.state.information.School} Title={this.state.information.Title} DateStudy={this.state.information.DateStudy} handleInputChange={this.handleInputChange.bind(this)}/> */}
-            {this.state.education.map(() => <Education addEducation={this.addEducation.bind(this)}/>)}
+            {this.state.education.map(() => <Education addEducation={this.addEducation.bind(this)} deleteEducation={this.deleteEducation.bind(this)}/>)}
           </div>
           
-          <button id="exp" onClick={this.addInfo}>Add Experience</button>
+          <div className="expBtn">
+            <button id="exp" onClick={this.addInfo}>Add Experience</button>
+          </div>
           <div className="experience">
             {/* <Experience /> */}
-            {this.state.experience.map(() => <Experience addExperience={this.addExperience.bind(this)} />)}
+            {this.state.experience.map(() => <Experience addExperience={this.addExperience.bind(this)} deleteExperience={this.deleteExperience.bind(this)}/>)}
           </div>
         </div>
 

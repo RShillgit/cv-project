@@ -1,4 +1,6 @@
 import { Component } from "react";
+import AddedExp from "./addedExp";
+import uniqid from "uniqid";
 
 class Experience extends Component{
     constructor(props) {
@@ -10,6 +12,7 @@ class Experience extends Component{
             Task: '',
             DateFrom: '',
             DateUntil: '',
+            id: uniqid(),
         }
     }
 
@@ -29,6 +32,7 @@ class Experience extends Component{
         }
         else {
             this.setState({ DateUntil: e.target.value }); 
+            this.setState({id: uniqid()})
         }
     }
 
@@ -40,56 +44,53 @@ class Experience extends Component{
         const task = this.state.Task;
         const datefrom = this.state.DateFrom;
         const dateuntil = this.state.DateUntil;
+        const id = this.state.id;
 
-        // Remove education info from the div and render a smaller div to show it has been added
-        const addedExperienceInformation = ([
-            <div className="addedEducationInformation"> 
-                <p>{company}</p>
-                <p>{position}</p>
-                <p>{task}</p>
-                <p>{datefrom}</p>
-                <p>{dateuntil}</p>
-                <button>X</button> 
-            </div>
-        ])
+        // Hide experience form and display addedExperience div
+        const container = e.target.parentElement.parentElement.parentElement;
+        const experienceForm = e.target.parentElement.parentElement;
+        const addedExperienceDiv = container.querySelector('.addedExperienceInformation');
+        experienceForm.style.display = 'none';
+        addedExperienceDiv.style.display = 'flex';
 
-        e.target.parentElement.innerHTML = addedExperienceInformation.map(() => <addedEducationInformation/>)
-    
-
-        this.props.addExperience(company, position, task, datefrom, dateuntil);
+        this.props.addExperience(company, position, task, datefrom, dateuntil, id);
     }
 
     render() {
         return (
-            <form className="experienceForm">
-               
-                <div className='experienceInformation'>
-
-                    <label>Company Name: 
-                        <input id="experienceCompany" onChange={this.handleChange} type="text"></input>
-                    </label>
-                                              
-                    <label>Position Title: 
-                        <input id="experiencePosition" onChange={this.handleChange} type="text"></input>
-                    </label>
-    
-                    <label>Task of Position:
-                        <input id="experienceTask" onChange={this.handleChange} type="text"></input>
-                    </label>
+            <div className="experience">
+            
+                <form className="experienceForm">
                 
-                    <label>Employed From: 
-                        <input id="experienceDateFrom" onChange={this.handleChange} type="date"></input>
-                    </label>
-    
-                    <label>Employed Until: 
-                        <input id="experienceDateUntil" onChange={this.handleChange} type="date"></input>
-                    </label>
+                    <div className='experienceInformation'>
 
-                    <button onClick={this.formSubmit}>Add Experience</button>
-    
-                </div>
+                        <label>Company Name: 
+                            <input id="experienceCompany" onChange={this.handleChange} type="text"></input>
+                        </label>
+                                                
+                        <label>Position Title: 
+                            <input id="experiencePosition" onChange={this.handleChange} type="text"></input>
+                        </label>
+        
+                        <label>Task of Position:
+                            <input id="experienceTask" onChange={this.handleChange} type="text"></input>
+                        </label>
+                    
+                        <label>Employed From: 
+                            <input id="experienceDateFrom" onChange={this.handleChange} type="date"></input>
+                        </label>
+        
+                        <label>Employed Until: 
+                            <input id="experienceDateUntil" onChange={this.handleChange} type="date"></input>
+                        </label>
+
+                        <button onClick={this.formSubmit}>Add Experience</button>
+        
+                    </div>
                                 
-            </form>
+                </form>
+                <AddedExp company={this.state.Company} position={this.state.Position} task={this.state.Task} datefrom={this.state.DateFrom} dateuntil={this.state.DateUntil} id={this.state.id} deleteExperience={this.props.deleteExperience}/>
+            </div>
         )
     }
 }
