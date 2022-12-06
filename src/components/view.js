@@ -1,4 +1,5 @@
 import { Component } from "react";
+import uniqid from "uniqid";
 
 class View extends Component {
     constructor(props) {
@@ -12,7 +13,7 @@ class View extends Component {
         const educationInfo = (
             info.Schools.map((school) => {
                 return (
-                    <div className="viewEducationInfo">
+                    <div key={uniqid()} className="viewEducationInfo">
                         
                         <p>School: {school.School}</p>
                         <p>Title of Study: {school.Title}</p>
@@ -25,7 +26,7 @@ class View extends Component {
         const experienceInfo = (
             info.Experience.map((exp) => {
                 return (
-                    <div className="viewExperienceInfo">
+                    <div key={uniqid()} className="viewExperienceInfo">
                         
                         <div className="expOverview">
                             <p>{exp.Company}</p>

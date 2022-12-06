@@ -4,6 +4,7 @@ import General from "./components/general";
 import Education from "./components/education";
 import Experience from "./components/experience";
 import View from "./components/view";
+import uniqid from "uniqid";
 
 
 class App extends Component{
@@ -131,15 +132,20 @@ class App extends Component{
     // On each button click concatenate a value to the array so it will render once for each button click
     if(e.target.id === 'edu') {
       this.setState({
-        education: this.state.education.concat(0)
+        education: this.state.education.concat({
+          placeholder: 0,
+          key: uniqid(),
+        })
       })
 
     }
     if(e.target.id === 'exp') {
       this.setState({
-        experience: this.state.experience.concat(1)
+        experience: this.state.experience.concat({
+          placeholder: 1,
+          key: uniqid(),
+        })
       })
-
     }
   }
 
@@ -189,20 +195,18 @@ class App extends Component{
             </div>
 
             <div className="education">
-              {/* <Education School={this.state.information.School} Title={this.state.information.Title} DateStudy={this.state.information.DateStudy} handleInputChange={this.handleInputChange.bind(this)}/> */}
-              {this.state.education.map(() => <Education addEducation={this.addEducation.bind(this)} deleteEducation={this.deleteEducation.bind(this)}/>)}
+              {this.state.education.map((edu) => <Education key={edu.key} addEducation={this.addEducation.bind(this)} deleteEducation={this.deleteEducation.bind(this)}/>)}
             </div>
             
             <div className="expBtn">
               <button id="exp" onClick={this.addInfo}>Add Experience</button>
             </div>
             <div className="experience">
-              {/* <Experience /> */}
-              {this.state.experience.map(() => <Experience addExperience={this.addExperience.bind(this)} deleteExperience={this.deleteExperience.bind(this)}/>)}
+              {this.state.experience.map((exp) => <Experience key={exp.key} addExperience={this.addExperience.bind(this)} deleteExperience={this.deleteExperience.bind(this)}/>)}
             </div>
           </div>
 
-          <div className="viewCV">
+          <div className="viewCV"> 
             <View info={this.state.information}/>
           </div>
         </div>
