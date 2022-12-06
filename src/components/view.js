@@ -13,7 +13,7 @@ class View extends Component {
             info.Schools.map((school) => {
                 return (
                     <div className="viewEducationInfo">
-                        <h2>Education</h2>
+                        
                         <p>School: {school.School}</p>
                         <p>Title of Study: {school.Title}</p>
                         <p>Date of Study: {school.DateStudy}</p>
@@ -26,7 +26,7 @@ class View extends Component {
             info.Experience.map((exp) => {
                 return (
                     <div className="viewExperienceInfo">
-                        <h2>Professional Experience</h2>
+                        
                         <div className="expOverview">
                             <p>{exp.Company}</p>
                             <p>{exp.Position}</p>
@@ -52,10 +52,12 @@ class View extends Component {
                 {/* Gonna need some type of for loop to render each education/experience */}
                 
                 <div className="edu">
+                    <h2>Education</h2>
                     {educationInfo}
                 </div>
 
                 <div className="exp">
+                    <h2>Professional Experience</h2>
                     {experienceInfo}
                 </div>
                 

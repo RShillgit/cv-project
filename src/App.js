@@ -15,20 +15,24 @@ class App extends Component{
         Name: 'John Smith',
         Email: 'FakeEmail@email.com',
         Phone: '555-555-5555',
-        Schools: [{
+        Schools: [],
+        /*
+        {
           School: 'Penn Dokie',
           Title: 'Computer Fiction',
           DateStudy: '2030-05-15',
           id: '',
-        }],
-        Experience: [{
+        }
+        {
           Company: 'Tech Company',
           Position: 'Software Engineer 1',
           Task: 'Code',
           DateFrom: '2022-05-15',
           DateUntil: '2050-05-15',
           id: '',
-        }],
+        }
+        */
+        Experience: [],
       },
       education: [],
       experience: [],
@@ -55,7 +59,16 @@ class App extends Component{
 
   deleteEducation = (id) => {
     // find the school with this id and delete it from state
-    
+    const filteredSchools = this.state.information.Schools.filter(function(school) {
+      return school.id !== id
+    })
+
+    this.setState(prevState => ({
+      information: {                  
+          ...prevState.information,    
+          Schools: filteredSchools     
+      }
+    }))
   }
 
   addExperience = (company, position, task, datefrom, dateuntil, id) => {
@@ -79,7 +92,16 @@ class App extends Component{
 
   deleteExperience = (id) => {
     // find the experience with this id and delete it from state
+    const filteredExperience = this.state.information.Experience.filter(function(exp) {
+      return exp.id !== id
+    })
 
+    this.setState(prevState => ({
+      information: {                  
+          ...prevState.information,    
+          Experience: filteredExperience    
+      }
+    }))
   }
 
   handleInputChange = (ID, val) => {

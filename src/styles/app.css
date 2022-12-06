@@ -67,6 +67,7 @@
 .viewGeneralInfo, .viewEducationInfo, .viewExperienceInfo {
     border-bottom: 2px solid gray;
 }
+
 .viewEducationInfo, .viewExperienceInfo {
     display: flex;
     flex-direction: column;
