@@ -179,6 +179,9 @@ class App extends Component{
 
     return (
       <div className="cv">
+        <div>
+          <h1 className="header">CV Generator</h1>
+        </div>
 
         <div className="previewEditBtn">
           <button id="preview-edit" onClick={this.viewEditClick}>View CV</button>
