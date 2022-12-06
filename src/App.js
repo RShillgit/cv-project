@@ -159,12 +159,13 @@ class App extends Component{
     if (this.state.preview === false) {
       previewEditBtn.innerHTML = 'View CV';
       editCVDiv.style.display = 'block';
-      viewCVDiv.style.display = 'none';
+      viewCVDiv.style.display = 'block'; //none
     }
     else {
       previewEditBtn.innerHTML = 'Edit CV';
-      editCVDiv.style.display = 'none';
+      editCVDiv.style.display = 'none'; //none
       viewCVDiv.style.display = 'block';
+      //viewCVDiv.style.width = '100%';
     }
   }
 
@@ -177,32 +178,34 @@ class App extends Component{
           <button id="preview-edit" onClick={this.viewEditClick}>View CV</button>
         </div>
 
-        <div className="editCV">
+        <div className="edit-view">
 
-          <General fullName={this.state.information.Name} Email={this.state.information.Email} Phone={this.state.information.Phone} handleInputChange={this.handleInputChange.bind(this)}/>
+          <div className="editCV">
 
-          <div className="eduBtn">
-            <button id="edu" onClick={this.addInfo}>Add Education</button>
+            <General fullName={this.state.information.Name} Email={this.state.information.Email} Phone={this.state.information.Phone} handleInputChange={this.handleInputChange.bind(this)}/>
+
+            <div className="eduBtn">
+              <button id="edu" onClick={this.addInfo}>Add Education</button>
+            </div>
+
+            <div className="education">
+              {/* <Education School={this.state.information.School} Title={this.state.information.Title} DateStudy={this.state.information.DateStudy} handleInputChange={this.handleInputChange.bind(this)}/> */}
+              {this.state.education.map(() => <Education addEducation={this.addEducation.bind(this)} deleteEducation={this.deleteEducation.bind(this)}/>)}
+            </div>
+            
+            <div className="expBtn">
+              <button id="exp" onClick={this.addInfo}>Add Experience</button>
+            </div>
+            <div className="experience">
+              {/* <Experience /> */}
+              {this.state.experience.map(() => <Experience addExperience={this.addExperience.bind(this)} deleteExperience={this.deleteExperience.bind(this)}/>)}
+            </div>
           </div>
 
-          <div className="education">
-            {/* <Education School={this.state.information.School} Title={this.state.information.Title} DateStudy={this.state.information.DateStudy} handleInputChange={this.handleInputChange.bind(this)}/> */}
-            {this.state.education.map(() => <Education addEducation={this.addEducation.bind(this)} deleteEducation={this.deleteEducation.bind(this)}/>)}
-          </div>
-          
-          <div className="expBtn">
-            <button id="exp" onClick={this.addInfo}>Add Experience</button>
-          </div>
-          <div className="experience">
-            {/* <Experience /> */}
-            {this.state.experience.map(() => <Experience addExperience={this.addExperience.bind(this)} deleteExperience={this.deleteExperience.bind(this)}/>)}
+          <div className="viewCV">
+            <View info={this.state.information}/>
           </div>
         </div>
-
-        <div className="viewCV">
-          <View info={this.state.information}/>
-        </div>
-          
       </div>
     );
 

@@ -84,7 +84,7 @@ class Experience extends Component{
                             <input id="experienceDateUntil" onChange={this.handleChange} type="date"></input>
                         </label>
 
-                        <button onClick={this.formSubmit}>Add Experience</button>
+                        <button id="addExp" onClick={this.formSubmit}>Add Experience</button>
         
                     </div>
                                 

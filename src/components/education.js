@@ -65,7 +65,7 @@ class Education extends Component{
                             <input id="educationDateStudy" onChange={this.handleChange} type="date"></input>
                         </label>
 
-                        <button onClick={this.formSubmit}>Add Education</button>
+                        <button id="addEdu" onClick={this.formSubmit}>Add Education</button>
 
                     </div>    
 

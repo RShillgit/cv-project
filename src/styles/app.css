@@ -6,10 +6,19 @@
 .cv {
     width: 70vw;
 }
-.cv, .editCV div, .viewCV {
+.cv,.editCV, .viewCV {
     margin: 1rem;
 }
-
+.editCV div {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+.edit-view {
+    display: flex;
+}
+.viewCV {
+    width: 100%;
+}
 
 .infoName, .infoEmail, .infoPhone {
     padding: 1rem;
@@ -29,10 +38,6 @@
     background-color: whitesmoke;
 }
 
-.viewCV {
-    display: none;
-}
-
 .previewEditBtn {
     display: flex;
     justify-content: center;
@@ -44,9 +49,13 @@
     border: 1px solid gray;
     border-radius: 1rem;
     background-color: whitesmoke;
-    margin: 5px;
+    padding: 1rem;
     align-items: center;
 }
+#addExp, #addEdu {
+    margin-top: 1rem;
+}
+
 .educationInformation, .experienceInformation {
     display: flex;
     flex-direction: column;

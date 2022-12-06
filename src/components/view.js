@@ -44,7 +44,7 @@ class View extends Component {
         return (
             <div>
                 <div className="viewGeneralInfo">
-                    <p>Full Name: {info.Name}</p>
+                    <p>{info.Name}</p>
                     <p>Email: {info.Email}</p>
                     <p>Phone Number: {info.Phone}</p>
                 </div>
