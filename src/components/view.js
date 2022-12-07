@@ -49,8 +49,6 @@ class View extends Component {
                     <p>Email: {info.Email}</p>
                     <p>Phone Number: {info.Phone}</p>
                 </div>
-
-                {/* Gonna need some type of for loop to render each education/experience */}
                 
                 <div className="edu">
                     <h2>Education</h2>
