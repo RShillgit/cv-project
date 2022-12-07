@@ -17,22 +17,6 @@ class App extends Component{
         Email: 'FakeEmail@email.com',
         Phone: '555-555-5555',
         Schools: [],
-        /*
-        {
-          School: 'Penn Dokie',
-          Title: 'Computer Fiction',
-          DateStudy: '2030-05-15',
-          id: '',
-        }
-        {
-          Company: 'Tech Company',
-          Position: 'Software Engineer 1',
-          Task: 'Code',
-          DateFrom: '2022-05-15',
-          DateUntil: '2050-05-15',
-          id: '',
-        }
-        */
         Experience: [],
       },
       education: [],
@@ -165,13 +149,12 @@ class App extends Component{
     if (this.state.preview === false) {
       previewEditBtn.innerHTML = 'View CV';
       editCVDiv.style.display = 'block';
-      viewCVDiv.style.display = 'block'; //none
+      viewCVDiv.style.display = 'block';
     }
     else {
       previewEditBtn.innerHTML = 'Edit CV';
-      editCVDiv.style.display = 'none'; //none
+      editCVDiv.style.display = 'none'; 
       viewCVDiv.style.display = 'block';
-      //viewCVDiv.style.width = '100%';
     }
   }
 
