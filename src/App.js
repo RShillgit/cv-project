@@ -6,6 +6,7 @@ import Experience from "./components/experience";
 import View from "./components/view";
 import uniqid from "uniqid";
 
+// Now I'm going to rewrite this app using functional components and hooks
 
 class App extends Component{
   constructor() {
