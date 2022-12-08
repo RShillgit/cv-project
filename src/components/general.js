@@ -1,9 +1,8 @@
-import { Component } from "react";
 import Edit from './edits';
 
-class General extends Component {
+const General = (props) => {
 
-    editField = (e) => {
+    const editField = (e) => {
         e.preventDefault();
 
         e.target.parentElement.style.display = 'none';
@@ -12,36 +11,33 @@ class General extends Component {
         editName.style.display = 'flex';
     }
 
-    render() {
-        return (
-            
-            <div className='generalInfo'>
-            
-                <div className='infoName'>
-                    <label>Full Name: </label>
-                    <p>{this.props.fullName}</p>
-                    <button id='Name' onClick={this.editField}>Edit</button>
-                </div>
-                <Edit divClass="editInputName" inputID="Name" inputType="text" value={this.props.fullName} handleInputChange={this.props.handleInputChange}/> 
-            
-                <div className='infoEmail'>
-                    <label>Email: </label>
-                    <p>{this.props.Email}</p>
-                    <button id='Email' onClick={this.editField}>Edit</button>
-                </div>
-                <Edit divClass="editInputEmail" inputID="Email" inputType="email" value={this.props.Email} handleInputChange={this.props.handleInputChange}/> 
-
-                <div className='infoPhone'>
-                    <label>Phone Number:</label>
-                    <p>{this.props.Phone}</p>
-                    <button id='Phone' onClick={this.editField}>Edit</button>
-                </div>
-                <Edit divClass="editInputPhone" inputID="Phone" inputType="text" value={this.props.Phone} handleInputChange={this.props.handleInputChange}/> 
-            
+    return (
+        
+        <div className='generalInfo'>
+        
+            <div className='infoName'>
+                <label>Full Name: </label>
+                <p>{props.fullName}</p>
+                <button id='Name' onClick={editField}>Edit</button>
             </div>
-            
-        )
-    }
+            <Edit divClass="editInputName" inputID="Name" inputType="text" value={props.fullName} handleInputChange={props.handleInputChange}/> 
+        
+            <div className='infoEmail'>
+                <label>Email: </label>
+                <p>{props.Email}</p>
+                <button id='Email' onClick={editField}>Edit</button>
+            </div>
+            <Edit divClass="editInputEmail" inputID="Email" inputType="email" value={props.Email} handleInputChange={props.handleInputChange}/> 
+
+            <div className='infoPhone'>
+                <label>Phone Number:</label>
+                <p>{props.Phone}</p>
+                <button id='Phone' onClick={editField}>Edit</button>
+            </div>
+            <Edit divClass="editInputPhone" inputID="Phone" inputType="text" value={props.Phone} handleInputChange={props.handleInputChange}/> 
+        
+        </div>
+    )
 }
 
 export default General;

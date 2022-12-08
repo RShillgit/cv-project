@@ -1,4 +1,4 @@
-import { Component } from "react";
+import { useState } from "react";
 import './styles/app.css';
 import General from "./components/general";
 import Education from "./components/education";
@@ -6,27 +6,21 @@ import Experience from "./components/experience";
 import View from "./components/view";
 import uniqid from "uniqid";
 
-// Now I'm going to rewrite this app using functional components and hooks
 
-class App extends Component{
-  constructor() {
-    super();
+const App = () => {
 
-    this.state = {
-      information: {
-        Name: 'John Smith',
-        Email: 'FakeEmail@email.com',
-        Phone: '555-555-5555',
-        Schools: [],
-        Experience: [],
-      },
-      education: [],
-      experience: [],
-      preview: false,
-    }
-  }
+  const [information, setInformation] = useState({
+    Name: 'John Smith',
+    Email: 'FakeEmail@email.com',
+    Phone: '555-555-5555',
+    Schools: [],
+    Experience: [],
+  })
+  const [education, setEducation] = useState([]);
+  const [experience, setExperience] = useState([]);
+  const [preview, setPreview] = useState(false);
 
-  addEducation = (school, title, date, id) => {
+  const addEducation = (school, title, date, id) => {
 
     const newSchool = {
       School: school,
@@ -35,29 +29,27 @@ class App extends Component{
       id: id,
     }
 
-    this.setState(prevState => ({
-      information: {                  
-          ...prevState.information,    
-          Schools: this.state.information.Schools.concat(newSchool)      
-      }
+    const updatedEducation = information.Schools.concat(newSchool);
+
+    setInformation(information => ({
+      ...information, 
+      Schools: updatedEducation
     }))
   }
 
-  deleteEducation = (id) => {
+  const deleteEducation = (id) => {
     // find the school with this id and delete it from state
-    const filteredSchools = this.state.information.Schools.filter(function(school) {
+    const filteredSchools = information.Schools.filter(function(school) {
       return school.id !== id
     })
 
-    this.setState(prevState => ({
-      information: {                  
-          ...prevState.information,    
-          Schools: filteredSchools     
-      }
+    setInformation(information => ({               
+      ...information,    
+      Schools: filteredSchools     
     }))
   }
 
-  addExperience = (company, position, task, datefrom, dateuntil, id) => {
+  const addExperience = (company, position, task, datefrom, dateuntil, id) => {
 
     const newExperience = {
       Company: company,
@@ -68,86 +60,73 @@ class App extends Component{
       id: id,
     }
 
-    this.setState(prevState => ({
-      information: {                  
-          ...prevState.information,    
-          Experience: this.state.information.Experience.concat(newExperience)      
-      }
+    const updatedExperience = information.Experience.concat(newExperience)
+
+    setInformation(information => ({
+      ...information,
+      Experience: updatedExperience               
+
     }))
   }
 
-  deleteExperience = (id) => {
+  const deleteExperience = (id) => {
     // find the experience with this id and delete it from state
-    const filteredExperience = this.state.information.Experience.filter(function(exp) {
+    const filteredExperience = information.Experience.filter(function(exp) {
       return exp.id !== id
     })
 
-    this.setState(prevState => ({
-      information: {                  
-          ...prevState.information,    
-          Experience: filteredExperience    
-      }
+    setInformation(information => ({
+      ...information,                    
+      Experience: filteredExperience    
     }))
   }
 
-  handleInputChange = (ID, val) => {
+  const handleInputChange = (ID, val) => {
 
-    if(ID === 'Name') this.setState(prevState => ({
-      information: {                  
-          ...prevState.information,    
-          Name: val      
-      }
+    if(ID === 'Name') setInformation(information => ({
+      ...information,                 
+      Name: val      
     }))
-    if(ID === 'Email') this.setState(prevState => ({
-      information: {                  
-          ...prevState.information,    
-          Email: val      
-      }
+    if(ID === 'Email') setInformation(information => ({
+      ...information,                 
+      Email: val      
     }))
-    if(ID === 'Phone') this.setState(prevState => ({
-      information: {                  
-          ...prevState.information,    
-          Phone: val      
-      }
+    if(ID === 'Phone') setInformation(information => ({
+      ...information,                 
+      Phone: val      
     })) 
   }
 
-  addInfo = (e) => {
+  const addInfo = (e) => {
 
     // On each button click concatenate a value to the array so it will render once for each button click
     if(e.target.id === 'edu') {
-      this.setState({
-        education: this.state.education.concat({
+      setEducation(education.concat({
           placeholder: 0,
           key: uniqid(),
-        })
-      })
-
+        }))
     }
     if(e.target.id === 'exp') {
-      this.setState({
-        experience: this.state.experience.concat({
+      setExperience(experience.concat({
           placeholder: 1,
           key: uniqid(),
-        })
-      })
+        }))
     }
   }
 
-  viewEditClick = () => {
-    this.setState(({
-      preview: !this.state.preview
-    }), this.handleView)
+  const viewEditClick = () => {
+    setPreview(!preview);
+    handleView();
   }
 
-  handleView = () => {
+  const handleView = () => {
 
     const previewEditBtn = document.getElementById('preview-edit');
     const editCVDiv = document.querySelector('.editCV');
     const viewCVDiv = document.querySelector('.viewCV');
 
     // Change button text and viewCV display depending on what screen is rendered
-    if (this.state.preview === false) {
+    if (preview === false) {
       previewEditBtn.innerHTML = 'View CV';
       editCVDiv.style.display = 'block';
       viewCVDiv.style.display = 'block'; 
@@ -159,48 +138,44 @@ class App extends Component{
     }
   }
 
-  render() {
+  return (
+    <div className="cv">
+      <div>
+        <h1 className="header">CV Generator</h1>
+      </div>
 
-    return (
-      <div className="cv">
-        <div>
-          <h1 className="header">CV Generator</h1>
-        </div>
+      <div className="previewEditBtn">
+        <button id="preview-edit" onClick={viewEditClick}>View CV</button>
+      </div>
 
-        <div className="previewEditBtn">
-          <button id="preview-edit" onClick={this.viewEditClick}>View CV</button>
-        </div>
+      <div className="edit-view">
 
-        <div className="edit-view">
+        <div className="editCV">
 
-          <div className="editCV">
+          <General fullName={information.Name} Email={information.Email} Phone={information.Phone} handleInputChange={handleInputChange.bind(this)}/>
 
-            <General fullName={this.state.information.Name} Email={this.state.information.Email} Phone={this.state.information.Phone} handleInputChange={this.handleInputChange.bind(this)}/>
-
-            <div className="eduBtn">
-              <button id="edu" onClick={this.addInfo}>Add Education</button>
-            </div>
-
-            <div className="education">
-              {this.state.education.map((edu) => <Education key={edu.key} addEducation={this.addEducation.bind(this)} deleteEducation={this.deleteEducation.bind(this)}/>)}
-            </div>
-            
-            <div className="expBtn">
-              <button id="exp" onClick={this.addInfo}>Add Experience</button>
-            </div>
-            <div className="experience">
-              {this.state.experience.map((exp) => <Experience key={exp.key} addExperience={this.addExperience.bind(this)} deleteExperience={this.deleteExperience.bind(this)}/>)}
-            </div>
+          <div className="eduBtn">
+            <button id="edu" onClick={addInfo}>Add Education</button>
           </div>
 
-          <div className="viewCV"> 
-            <View info={this.state.information}/>
+          <div className="education">
+            {education.map((edu) => <Education key={edu.key} addEducation={addEducation.bind(this)} deleteEducation={deleteEducation.bind(this)}/>)}
           </div>
+          
+          <div className="expBtn">
+            <button id="exp" onClick={addInfo}>Add Experience</button>
+          </div>
+          <div className="experience">
+            {experience.map((exp) => <Experience key={exp.key} addExperience={addExperience.bind(this)} deleteExperience={deleteExperience.bind(this)}/>)}
+          </div>
+        </div>
+
+        <div className="viewCV"> 
+          <View info={information}/>
         </div>
       </div>
-    );
-
-  }
+    </div>
+  );
 }
 
 export default App;

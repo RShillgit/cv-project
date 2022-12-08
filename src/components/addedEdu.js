@@ -1,29 +1,24 @@
-import { Component } from "react";
+import React from "react";
 
-class AddedEdu extends Component {
-    constructor() {
-        super();
-    }
+const AddedEdu = (props) => {
 
-    deleteEdu = (e) => {
+    const deleteEdu = (e) => {
         e.preventDefault();
 
         // Remove the added education from the DOM
         e.target.parentElement.parentElement.removeChild(e.target.parentElement)
 
         // Run the delete education function
-        this.props.deleteEducation(this.props.id);
+        props.deleteEducation(props.id);
     }
 
-    render() {
-        return(
-            <div className="addedEducationInformation">
-                <p>{this.props.school}</p>
-                <p>{this.props.title}</p>
-                <p>{this.props.datestudy}</p>
-                <button onClick={this.deleteEdu}>X</button>
-            </div>
-        )
-    }
+    return(
+        <div className="addedEducationInformation">
+            <p>{props.school}</p>
+            <p>{props.title}</p>
+            <p>{props.datestudy}</p>
+            <button onClick={deleteEdu}>X</button>
+        </div>
+    ) 
 }
 export default AddedEdu;

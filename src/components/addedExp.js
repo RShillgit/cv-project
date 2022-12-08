@@ -1,31 +1,26 @@
-import { Component } from "react";
+import React from "react";
 
-class AddedExp extends Component {
-    constructor() {
-        super();
-    }
+const AddedExp = (props) => {
 
-    deleteExp = (e) => {
+    const deleteExp = (e) => {
         e.preventDefault();
 
         // Remove the added experience from the DOM
         e.target.parentElement.parentElement.removeChild(e.target.parentElement)
 
         // Run the delete experience function
-        this.props.deleteExperience(this.props.id);
+        props.deleteExperience(props.id);
     }
 
-    render() {
-        return(
-            <div className="addedExperienceInformation">
-                <p>{this.props.company}</p>
-                <p>{this.props.position}</p>
-                <p>{this.props.task}</p>
-                <p>{this.props.datefrom}</p>
-                <p>{this.props.dateuntil}</p>
-                <button onClick={this.deleteExp}>X</button>
-            </div>
-        )
-    }
+    return(
+        <div className="addedExperienceInformation">
+            <p>{props.company}</p>
+            <p>{props.position}</p>
+            <p>{props.task}</p>
+            <p>{props.datefrom}</p>
+            <p>{props.dateuntil}</p>
+            <button onClick={deleteExp}>X</button>
+        </div>
+    )
 }
 export default AddedExp;
